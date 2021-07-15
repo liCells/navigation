@@ -1,0 +1,37 @@
+.main-search {
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 650px;
+    bottom: 70px;
+    border: none;
+    height: 67px;
+    margin: auto;
+    outline: medium;
+    font-size: 37px;
+    position: absolute;
+    text-align: center;
+    border-radius: 22px;
+    background-color: #e3e3e3;
+}
+
+body {
+    background-color: #fdebd6;
+}
+
+.suspendedShadow {
+    -webkit-transition: -webkit-box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: -webkit-box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: box-shadow;
+}
+
+.suspendedShadow:hover,
+.suspendedShadow:focus {
+    -webkit-box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}

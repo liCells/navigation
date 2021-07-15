@@ -1,0 +1,12 @@
+{
+  "name": "demo",
+  "version": "0.0.1",
+  "description": "导航",
+  "manifest_version": 2,
+  "chrome_url_overrides": {
+    "newtab": "popup.html"
+  },
+  "permissions": [
+    "bookmarks"
+  ]
+}
