@@ -1,9 +1,15 @@
+.main-center {
+    display: block !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
 .main-search {
     top: 0;
     left: 0;
     right: 0;
     width: 650px;
-    bottom: 70px;
+    bottom: 50%;
     border: none;
     height: 67px;
     margin: auto;
@@ -13,6 +19,26 @@
     text-align: center;
     border-radius: 22px;
     background-color: #e3e3e3;
+}
+
+.main-data-list {
+    top: 9%;
+    left: 0;
+    right: 2%;
+    width: 650px;
+    bottom: 50%;
+    border: none;
+    height: 67px;
+    margin: auto;
+    outline: medium;
+    font-size: 37px;
+    position: absolute;
+    text-align: center;
+    border-radius: 22px;
+}
+
+.option {
+    list-style: none;
 }
 
 body {
