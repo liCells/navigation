@@ -5,18 +5,16 @@
 }
 
 .main-search {
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 650px;
-    bottom: 50%;
+    z-index: 9;
     border: none;
-    height: 67px;
-    margin: auto;
     outline: medium;
-    font-size: 37px;
-    position: absolute;
+    width: 650px;
+    height: 67px;
+    margin: 10% auto;
+    font-size: 43px;
+    display: block;
     text-align: center;
+    position: relative;
     border-radius: 22px;
     background-color: #e3e3e3;
 }
