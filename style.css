@@ -2,40 +2,31 @@
     display: block !important;
     margin-right: auto !important;
     margin-left: auto !important;
+    text-align: center;
 }
 
 .main-search {
     z-index: 9;
     border: none;
     outline: medium;
-    width: 650px;
-    height: 67px;
-    margin: 10% auto;
-    font-size: 43px;
-    display: block;
+    width: 35%;
+    margin: auto;
+    font-size: 45px;
     text-align: center;
-    position: relative;
     border-radius: 22px;
     background-color: #e3e3e3;
 }
 
 .main-data-list {
-    top: 9%;
     left: 0;
-    right: 2%;
-    width: 650px;
-    bottom: 50%;
+    right: 0;
+    width: 35%;
     border: none;
-    height: 67px;
-    margin: auto;
+    margin: 0 auto;
     outline: medium;
     font-size: 37px;
     position: absolute;
-    text-align: center;
     border-radius: 22px;
-}
-
-.option {
     list-style: none;
 }
 
@@ -44,8 +35,6 @@ body {
 }
 
 .suspendedShadow {
-    -webkit-transition: -webkit-box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    transition: -webkit-box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: box-shadow;
 }

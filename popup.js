@@ -1,4 +1,4 @@
-let symbol = '1'
+let symbol = 1
 let position = -1
 let optionIdPrefix = 'option-'
 let ignoreKeys = [37, 38, 39, 40, 13, 27]
@@ -6,7 +6,7 @@ let ignoreKeys = [37, 38, 39, 40, 13, 27]
 // 获取输入框
 let searchObj = document.getElementById("search")
 let dataListObj = document.getElementById("dataList")
-
+let markObj = document.getElementById("mark")
 // 聚焦到输入框
 searchObj.focus()
 // 设置输入框触发事件
@@ -35,6 +35,29 @@ function buildList(val) {
 // 搜索事件
 function search() {
     let val = searchObj.value
+    if (event.ctrlKey) {
+        if (event.keyCode === 39 && ++symbol === 5) {
+            symbol = 1
+        }
+        if (event.keyCode === 37 && --symbol === 0) {
+            symbol = 4
+        }
+        switch (symbol) {
+            case 1:
+                markObj.innerHTML = 'G'
+                break
+            case 2:
+                markObj.innerHTML = 'B'
+                break
+            case 3:
+                markObj.innerHTML = 'S'
+                break
+            case 4:
+                markObj.innerHTML = '3'
+                break
+        }
+        return
+    }
 
     if (event.keyCode === 27) {
         dataListObj.innerHTML = ''
@@ -44,9 +67,9 @@ function search() {
 
     if (event.keyCode === 38) {
         try {
-            document.getElementById(optionIdPrefix + position).style.color = ''
+            document.getElementById(optionIdPrefix + position).style.color = 'gray'
             let dataObj = document.getElementById(optionIdPrefix + --position)
-            dataObj.style.color = 'red'
+            dataObj.style.color = 'black'
             if (dataObj.innerHTML !== '' && dataObj.innerHTML !== undefined) {
                 searchObj.value = dataObj.innerHTML
             }
@@ -58,12 +81,12 @@ function search() {
             return
         }
         try {
-            document.getElementById(optionIdPrefix + position).style.color = ''
+            document.getElementById(optionIdPrefix + position).style.color = 'gray'
         } catch (e) {
 
         }
         let dataObj = document.getElementById(optionIdPrefix + ++position)
-        dataObj.style.color = 'red'
+        dataObj.style.color = 'black'
 
         if (dataObj.innerHTML !== '' && dataObj.innerHTML !== undefined) {
             searchObj.value = dataObj.innerHTML
@@ -76,8 +99,17 @@ function search() {
 
     if (event.keyCode === 13 && !event.shiftKey) {
         switch (symbol) {
-            case '1':
+            case 1:
                 location.href = 'https://www.google.com/search?q=' + val
+                break
+            case 2:
+                location.href = 'https://www.baidu.com/s?wd=' + val
+                break
+            case 3:
+                location.href = 'https://www.sogou.com/web?query=' + val
+                break
+            case 4:
+                location.href = 'https://www.so.com/s?q=' + val
                 break
         }
         return
@@ -93,7 +125,7 @@ function search() {
         let sum = 0
         for (let i = 0; i < bookmarks.length; i++) {
             if (bookmarks[i].title.toLowerCase().indexOf(val.toLowerCase()) > -1) {
-                li += "<li style='overflow:hidden; text-overflow: ellipsis; white-space: nowrap;' id='" + optionIdPrefix + sum + "' value='" + bookmarks[i].url + "'>" + bookmarks[i].title + "</li>"
+                li += "<li style='overflow:hidden; text-overflow: ellipsis; white-space: nowrap; color: gray;' id='" + optionIdPrefix + sum + "' value='" + bookmarks[i].url + "'>" + bookmarks[i].title + "</li>"
                 sum++
             }
             if (sum === 10) {
