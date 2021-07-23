@@ -4,12 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main</title>
+    <link rel="stylesheet" href="./mdui/css/mdui.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<div class="main-center">
-    <div style="margin-top: 10%; position:relative;">
-        <strong id="mark" style="position:absolute; left: 33%; font-size: 37px; color: purple; z-index: 10;">G</strong>
+<div class="mdui-tab mdui-tab-full-width" mdui-tab>
+    <a href="#tab1" class="mdui-ripple mdui-tab-active">
+        <i class="mdui-icon material-icons">search</i>
+        <label>搜索</label>
+    </a>
+    <a href="#tab2" class="mdui-ripple">
+        <i class="mdui-icon material-icons">navigation</i>
+        <label>导航</label>
+    </a>
+    <a href="#tab3" class="mdui-ripple">
+        <i class="mdui-icon material-icons">perm_contact_calendar</i>
+        <label>nearby</label>
+    </a>
+</div>
+
+<div id="tab1" style="display:none;">
+    <div style="margin-top: 10%; position:relative; text-align:center;">
+        <strong id="logo" style="position:absolute; left: 33%; top: 9%; font-size: 41px; color: purple; z-index: 10;">G</strong>
         <input class="main-search suspendedShadow" id="search" placeholder="..."/>
     </div>
     <div>
@@ -17,6 +33,16 @@
         </ul>
     </div>
 </div>
+
+<div id="tab2" style="display:none;">
+    2
+</div>
+
+<div id="tab3" style="display:none;">
+    3
+</div>
+
+<script src="./mdui/js/mdui.min.js"></script>
 <script src="./data.js"></script>
 <script src="./popup.js"></script>
 </body>

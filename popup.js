@@ -1,12 +1,16 @@
-let symbol = 1
+// 搜索引擎选项
+let symbol = getSearchEngineIndex()
+// 选项位置
 let position = -1
 let optionIdPrefix = 'option-'
+// 特殊KEY
 let ignoreKeys = [37, 38, 39, 40, 13, 27]
 
 // 获取输入框
 let searchObj = document.getElementById("search")
 let dataListObj = document.getElementById("dataList")
-let markObj = document.getElementById("mark")
+let markObj = document.getElementById("logo")
+
 // 聚焦到输入框
 searchObj.focus()
 // 设置输入框触发事件
@@ -35,62 +39,22 @@ function buildList(val) {
 // 搜索事件
 function search() {
     let val = searchObj.value
-    if (event.ctrlKey) {
-        if (event.keyCode === 39 && ++symbol === 5) {
-            symbol = 1
-        }
-        if (event.keyCode === 37 && --symbol === 0) {
-            symbol = 4
-        }
-        switch (symbol) {
-            case 1:
-                markObj.innerHTML = 'G'
-                break
-            case 2:
-                markObj.innerHTML = 'B'
-                break
-            case 3:
-                markObj.innerHTML = 'S'
-                break
-            case 4:
-                markObj.innerHTML = '3'
-                break
-        }
+    // ALT + ←/→
+    if (event.altKey) {
+        switchSearchEngine(event.keyCode);
         return
     }
 
+    // ESC
     if (event.keyCode === 27) {
-        dataListObj.innerHTML = ''
-        searchObj.value = ''
+        emptySearchInput()
         return
     }
 
     if (event.keyCode === 38) {
-        try {
-            document.getElementById(optionIdPrefix + position).style.color = 'gray'
-            let dataObj = document.getElementById(optionIdPrefix + --position)
-            dataObj.style.color = 'black'
-            if (dataObj.innerHTML !== '' && dataObj.innerHTML !== undefined) {
-                searchObj.value = dataObj.innerHTML
-            }
-        } catch (e) {
-
-        }
+        up()
     } else if (event.keyCode === 40) {
-        if (position === document.getElementsByTagName("li").length - 1) {
-            return
-        }
-        try {
-            document.getElementById(optionIdPrefix + position).style.color = 'gray'
-        } catch (e) {
-
-        }
-        let dataObj = document.getElementById(optionIdPrefix + ++position)
-        dataObj.style.color = 'black'
-
-        if (dataObj.innerHTML !== '' && dataObj.innerHTML !== undefined) {
-            searchObj.value = dataObj.innerHTML
-        }
+        down()
     }
     if (val === '') {
         dataListObj.innerHTML = ''
@@ -98,20 +62,8 @@ function search() {
     }
 
     if (event.keyCode === 13 && !event.shiftKey) {
-        switch (symbol) {
-            case 1:
-                location.href = 'https://www.google.com/search?q=' + val
-                break
-            case 2:
-                location.href = 'https://www.baidu.com/s?wd=' + val
-                break
-            case 3:
-                location.href = 'https://www.sogou.com/web?query=' + val
-                break
-            case 4:
-                location.href = 'https://www.so.com/s?q=' + val
-                break
-        }
+        let prefix = getSearchEngine(symbol)
+        location.href = prefix + val
         return
     }
 
@@ -125,7 +77,7 @@ function search() {
         let sum = 0
         for (let i = 0; i < bookmarks.length; i++) {
             if (bookmarks[i].title.toLowerCase().indexOf(val.toLowerCase()) > -1) {
-                li += "<li style='overflow:hidden; text-overflow: ellipsis; white-space: nowrap; color: gray;' id='" + optionIdPrefix + sum + "' value='" + bookmarks[i].url + "'>" + bookmarks[i].title + "</li>"
+                li += "<li class='select-option' id='" + optionIdPrefix + sum + "' value='" + bookmarks[i].url + "'>" + bookmarks[i].title + "</li>"
                 sum++
             }
             if (sum === 10) {
@@ -140,4 +92,67 @@ function search() {
             })
         }
     }
+}
+
+// 上移
+function up() {
+    try {
+        document.getElementById(optionIdPrefix + position).style.color = 'gray'
+        let dataObj = document.getElementById(optionIdPrefix + --position)
+        dataObj.style.color = 'black'
+        if (dataObj.innerHTML !== '' && dataObj.innerHTML !== undefined) {
+            searchObj.value = dataObj.innerHTML
+        }
+    } catch (e) {
+
+    }
+}
+
+// 下移
+function down() {
+    if (position === document.getElementsByTagName("li").length - 1) {
+        return
+    }
+    try {
+        document.getElementById(optionIdPrefix + position).style.color = 'gray'
+    } catch (e) {
+
+    }
+    let dataObj = document.getElementById(optionIdPrefix + ++position)
+    dataObj.style.color = 'black'
+
+    if (dataObj.innerHTML !== '' && dataObj.innerHTML !== undefined) {
+        searchObj.value = dataObj.innerHTML
+    }
+}
+
+// 切换搜索引擎
+function switchSearchEngine(val) {
+    if (val === 39 && ++symbol === getSearchEngineSum() + 1) {
+        symbol = 1
+    }
+    if (val === 37 && --symbol === 0) {
+        symbol = 4
+    }
+    switch (symbol) {
+        case 1:
+            markObj.innerHTML = 'G'
+            break
+        case 2:
+            markObj.innerHTML = 'B'
+            break
+        case 3:
+            markObj.innerHTML = 'S'
+            break
+        case 4:
+            markObj.innerHTML = '3'
+            break
+    }
+    setSearchEngineIndex(symbol)
+}
+
+// 清空搜索框
+function emptySearchInput() {
+    dataListObj.innerHTML = ''
+    searchObj.value = ''
 }
