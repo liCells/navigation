@@ -57,8 +57,8 @@ function findOptions(val, options) {
 // 搜索事件
 function search() {
     let val = searchObj.value
-    // ALT + ←/→
-    if (event.altKey) {
+    // CTRL + ALT + ←/→
+    if (event.altKey && event.ctrlKey) {
         switchSearchEngine(event.keyCode)
         return
     }
