@@ -17,18 +17,92 @@ function init() {
 
 let commonlyUsedUrls = [
     {
-        title: 'github',
-        url: 'https://github.com/'
+        category: 'code',
+        urls: [
+            {
+                title: 'github',
+                url: 'https://github.com/',
+                content: ''
+            },
+            {
+                title: 'gitee',
+                url: 'https://gitee.com/',
+                content: ''
+            },
+            {
+                title: '美团技术博客',
+                url: 'https://tech.meituan.com/',
+                content: ''
+            },
+            {
+                title: '数据库内核月报',
+                url: 'http://mysql.taobao.org/monthly/',
+                content: ''
+            },
+            {
+                title: 'Thoughtworks洞见',
+                url: 'https://insights.thoughtworks.cn/',
+                content: ''
+            },
+            {
+                title: 'pom 镜像站',
+                url: 'https://mvnrepository.com/',
+                content: '我是人类...'
+            },
+            {
+                title: 'Programming-Idioms',
+                url: 'https://programming-idioms.org/about#about-block-cheatsheets',
+                content: '学习新语言, 将两种语言进行对比'
+            },
+            {
+                title: '探索雷达',
+                url: 'https://www.thoughtworks.com/cn/radar',
+                content: '有态度的前沿技术解析'
+            },
+            {
+                title: 'github-rank',
+                url: 'https://wangchujiang.com/github-rank/',
+                content: 'Github 中国和全球用户排名, 全球仓库 Star 最多排名'
+            },
+            {
+                title: '',
+                url: '',
+                content: ''
+            },
+        ]
     },
     {
-        title: 'gitee',
-        url: 'https://gitee.com/'
-    },
-    {
-        title: '',
-        url: ''
+        category: 'movies',
+        urls: [
+            {
+                title: '哔哩哔哩',
+                url: 'https://www.bilibili.com/',
+                content: ''
+            },
+            {
+                title: '油管',
+                url: 'https://www.youtube.com/',
+                content: ''
+            },
+            {
+                title: '',
+                url: '',
+                content: ''
+            },
+            {
+                title: '',
+                url: '',
+                content: ''
+            },
+            {
+                title: '',
+                url: '',
+                content: ''
+            },
+        ]
     },
 ]
+
 
 // 根据index获取对应的搜索引擎
 function getSearchEngine(val) {
@@ -37,7 +111,7 @@ function getSearchEngine(val) {
 
 // 获取当前搜索引擎index
 function getSearchEngineIndex() {
-    return localStorage.getItem(localStorageIndexKey)
+    return parseInt(localStorage.getItem(localStorageIndexKey))
 }
 
 // 获取当前搜索引擎总数

@@ -10,6 +10,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     color: gray;
+    text-align: center;
 }
 
 .main-search {

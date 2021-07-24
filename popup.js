@@ -5,6 +5,9 @@ let position = -1
 let optionIdPrefix = 'option-'
 // 特殊KEY
 let ignoreKeys = [37, 38, 39, 40, 13, 27]
+let temp = []
+let optionalSum = 0
+let optionalContext = ''
 
 // 获取输入框
 let searchObj = document.getElementById("search")
@@ -21,7 +24,8 @@ const bookmarks = []
 // 获取书签
 chrome.bookmarks.getTree(function (bookmarkArray) {
     buildList(bookmarkArray)
-    buildList(commonlyUsedUrls)
+    // buildList(commonlyUsedUrls)
+    switchSearchEngine(null)
 });
 
 // 递归处理书签
@@ -36,12 +40,26 @@ function buildList(val) {
     }
 }
 
+function findOptions(val, options) {
+    position = -1
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].title.toLowerCase().indexOf(val.toLowerCase()) > -1) {
+            optionalContext += "<li class='select-option' id='" + optionIdPrefix + optionalSum + "' value='" + options[i].url + "'>" + options[i].title + "</li>"
+            optionalSum++
+        }
+        if (optionalSum === 10) {
+            break
+        }
+    }
+    return optionalContext
+}
+
 // 搜索事件
 function search() {
     let val = searchObj.value
     // ALT + ←/→
     if (event.altKey) {
-        switchSearchEngine(event.keyCode);
+        switchSearchEngine(event.keyCode)
         return
     }
 
@@ -72,17 +90,16 @@ function search() {
     }
 
     if (ignoreKeys.indexOf(event.keyCode) === -1) {
-        position = -1
-        let li = ''
-        let sum = 0
-        for (let i = 0; i < bookmarks.length; i++) {
-            if (bookmarks[i].title.toLowerCase().indexOf(val.toLowerCase()) > -1) {
-                li += "<li class='select-option' id='" + optionIdPrefix + sum + "' value='" + bookmarks[i].url + "'>" + bookmarks[i].title + "</li>"
-                sum++
+        optionalSum = 0
+        optionalContext = ''
+        let li = findOptions(val, bookmarks)
+        if (li === '' || optionalSum !== 10) {
+            if (symbol === 1) {
+                getTipsForGoogle(val)
+            } else {
+                getTipsForBaidu(val)
             }
-            if (sum === 10) {
-                break
-            }
+            li = findOptions(val, temp)
         }
         dataListObj.innerHTML = li
         let dataObj = document.getElementsByTagName("li")
@@ -155,4 +172,60 @@ function switchSearchEngine(val) {
 function emptySearchInput() {
     dataListObj.innerHTML = ''
     searchObj.value = ''
+}
+
+// 从百度获取提示
+function getTipsForBaidu(val) {
+    let url = 'https://www.baidu.com/sugrec?ie=utf-8&json=1&prod=pc&from=pc_web&wd=' + val
+    let xhr = ''
+    if (window.XMLHttpRequest) {
+        xhr = new window.XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHttp');
+    }
+    xhr.open('get', url, true)
+    xhr.setRequestHeader('Content-Type', 'text/plain; charset=UTF-8')
+    xhr.send()
+    xhr.onreadystatechange = function () {
+        if (xhr.status === 200) {
+            try {
+                let val1 = JSON.parse(xhr.response).g
+                temp = []
+                for (let i = 0; i < val1.length; i++) {
+                    temp.push({title: val1[i].q, url: ''})
+                }
+            } catch (e) {
+                temp = {}
+            }
+        }
+    }
+}
+
+// 从谷歌获取提示
+function getTipsForGoogle(val) {
+    let url = 'https://www.google.com.hk/complete/search?q=' + val + '&client=gws-wiz&hl=zh-CN'
+    let xhr = ''
+    if (window.XMLHttpRequest) {
+        xhr = new window.XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHttp');
+    }
+    xhr.open('get', url, true)
+    xhr.setRequestHeader('Content-Type', 'text/plain; charset=UTF-8')
+    xhr.send()
+    xhr.onreadystatechange = function () {
+        if (xhr.status === 200) {
+            try {
+                let val1 = xhr.response.replace('window.google.ac.h(', '')
+                let val2 = val1.substring(0, val1.length - 1)
+                let val3 = JSON.parse(val2)[0]
+                temp = []
+                for (let i = 0; i < val3.length; i++) {
+                    temp.push({title: val3[i][0], url: ''})
+                }
+            } catch (e) {
+                temp = {}
+            }
+        }
+    }
 }

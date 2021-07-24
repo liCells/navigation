@@ -7,6 +7,9 @@
     "newtab": "popup.html"
   },
   "permissions": [
-    "bookmarks"
+    "bookmarks",
+    "https://www.baidu.com/",
+    "https://*.google.com/",
+    "https://*.google.com.hk/"
   ]
 }
