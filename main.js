@@ -6,7 +6,7 @@ let optionIdPrefix = 'option-'
 let prefixTab = "tab-"
 let tabIndex = 0
 // 特殊KEY
-let ignoreKeys = [37, 38, 39, 40, 13, 27]
+let ignoreKeys = [37, 38, 39, 40, 13, 27, 16, 17, 18]
 let temp = []
 let optionalSum = 0
 let optionalContext = ''
@@ -19,7 +19,7 @@ let markObj = document.getElementById("logo")
 
 // 设置输入框触发事件
 searchObj.onkeydown = search
-navigationObj.click = tabIndex = 1
+navigationObj.onclick = tabIndex = 1
 
 // 处理所有书签
 const bookmarks = []
@@ -67,9 +67,9 @@ document.onkeyup = function() {
         searchObj.focus()
         return
     }
-    if (event.shiftKey && event.keyCode === 192) {
-        tabIndex === 1 ? tabIndex = 0 : ++tabIndex
-        document.getElementById(prefixTab + tabIndex).click()
+    if (event.altKey && (event.keyCode === 49 || event.keyCode === 50)) {
+        tabIndex = event.keyCode === 49 ? 0 : 1
+        document.getElementById(prefixTab +  tabIndex).click()
     }
 }
 
@@ -89,13 +89,16 @@ function search() {
         return
     }
 
+    // 上下选择
     if (event.keyCode === 38) {
         up()
     } else if (event.keyCode === 40) {
         down()
     }
+
     if (val === '') {
         dataListObj.innerHTML = ''
+        searchObj.style.borderRadius = '22px 22px 22px 22px'
         return
     }
 
@@ -125,6 +128,8 @@ function search() {
         let dataObj = document.getElementsByTagName("li")
         if (dataObj.length !== 0) {
             searchObj.style.borderRadius = '22px 22px 0px 0px'
+        } else {
+            searchObj.style.borderRadius = '22px 22px 22px 22px'
         }
         for (let i = 0; i < dataObj.length; i++) {
             dataObj[i].addEventListener("click", function () {

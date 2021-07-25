@@ -17,24 +17,22 @@
     z-index: 9;
     border: none;
     outline: medium;
-    width: 35%;
-    margin: auto;
+    width: 100%;
     height: 50px;
     font-size: 30px;
+    padding-right: 0;
+    padding-left: 0;
     text-align: center;
     border-radius: 22px 22px;
     background-color: #e3e3e3;
 }
 
 .main-data-list {
-    left: -22px;
-    right: 0;
-    width: 622px;
+    padding-inline-start: 0;
+    width: 100%;
     border: none;
     margin: 0 auto;
-    outline: medium;
-    font-size: 37px;
-    position: absolute;
+    font-size: 30px;
     border-radius: 0 0 22px 22px;
     list-style: none;
 }
@@ -44,31 +42,15 @@ body {
     background-size: 100% 100%;
 }
 
-.suspendedShadow {
-    transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: box-shadow;
-}
-
-.suspendedShadow:hover,
-.suspendedShadow:focus {
-    -webkit-box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14),
-    0 3px 14px 2px rgba(0, 0, 0, 0.12);
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14),
-    0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-
 .corner-button {
     margin-top: 3%;
-    width: 300px;
-    height: 150px;
+    width: 100%;
+    height: 15%;
     letter-spacing: .02rem;
     cursor: pointer;
     background: transparent;
     border: 0.5rem solid currentColor;
     padding: 1.5rem 2rem;
-    font-size: 2.2rem;
     color: rgba(195, 81, 215, 0.73);
     position: relative;
     transition: color 0.3s;
@@ -124,7 +106,7 @@ body {
 }
 
 .btn-content {
-    font-size: 30px;
+    font-size: 150%;
 }
 
 html {
