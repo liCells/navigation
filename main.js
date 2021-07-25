@@ -13,11 +13,13 @@ let optionalContext = ''
 
 // 获取输入框
 let searchObj = document.getElementById("search")
+let navigationObj = document.getElementById("tab-1")
 let dataListObj = document.getElementById("dataList")
 let markObj = document.getElementById("logo")
 
 // 设置输入框触发事件
 searchObj.onkeydown = search
+navigationObj.click = tabIndex = 1
 
 // 处理所有书签
 const bookmarks = []
@@ -56,16 +58,21 @@ function findOptions(val, options) {
     return optionalContext
 }
 
-document.onkeydown = function() {
-    if (event.shiftKey && event.keyCode === 9) {
-        if (tabIndex === 1) {
+document.onkeyup = function() {
+    if (event.keyCode === 191) {
+        if (tabIndex !== 0) {
             tabIndex = 0
-        } else {
-            ++tabIndex
+            document.getElementById(prefixTab + tabIndex).click()
         }
+        searchObj.focus()
+        return
+    }
+    if (event.shiftKey && event.keyCode === 192) {
+        tabIndex === 1 ? tabIndex = 0 : ++tabIndex
         document.getElementById(prefixTab + tabIndex).click()
     }
 }
+
 // 搜索事件
 function search() {
     let val = searchObj.value
