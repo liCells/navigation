@@ -18,7 +18,7 @@ function init() {
 
 function checkNetwork() {
     if (getSearchEngineIndex() === 1) {
-        var startTime, endTime
+        let startTime
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 1) {
@@ -34,7 +34,7 @@ function checkNetwork() {
                 switching()
             }
             if (xhr.readyState === 4 && xhr.status === 200) {
-                if ((Date.now() - startTime) > 1000) {
+                if ((Date.now() - startTime) > 2500) {
                     mdui.snackbar({
                         message: '谷歌网络延迟偏高, 建议使用百度',
                         timeout: 3000,
@@ -43,7 +43,7 @@ function checkNetwork() {
                 }
             }
         }
-        xhr.timeout = 3000
+        xhr.timeout = 5000
         xhr.open("GET", "https://www.google.com", true);
         xhr.send()
     }
