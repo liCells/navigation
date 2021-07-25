@@ -4,10 +4,11 @@
   "description": "导航",
   "manifest_version": 2,
   "chrome_url_overrides": {
-    "newtab": "popup.html"
+    "newtab": "index.html"
   },
   "permissions": [
     "bookmarks",
+    "storage",
     "https://www.baidu.com/",
     "https://*.google.com/",
     "https://*.google.com.hk/"

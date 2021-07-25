@@ -4,6 +4,7 @@ let symbol = getSearchEngineIndex()
 let position = -1
 let optionIdPrefix = 'option-'
 let prefixTab = "tab-"
+let tabIndex = 0
 // 特殊KEY
 let ignoreKeys = [37, 38, 39, 40, 13, 27]
 let temp = []
@@ -16,7 +17,7 @@ let dataListObj = document.getElementById("dataList")
 let markObj = document.getElementById("logo")
 
 // 设置输入框触发事件
-searchObj.onkeyup = search
+searchObj.onkeydown = search
 
 // 处理所有书签
 const bookmarks = []
@@ -55,16 +56,14 @@ function findOptions(val, options) {
     return optionalContext
 }
 
-document.onkeydown=function(e) {
-    if (e.shiftKey && event.keyCode === 9) {
-        let activeTab = document.getElementsByClassName("mdui-tab-active")
-        let index = parseInt(activeTab[0].id.replace(prefixTab, ""))
-        if (index === 1) {
-            index = 0
+document.onkeydown = function() {
+    if (event.shiftKey && event.keyCode === 9) {
+        if (tabIndex === 1) {
+            tabIndex = 0
         } else {
-            ++index
+            ++tabIndex
         }
-        document.getElementById(prefixTab + index).click()
+        document.getElementById(prefixTab + tabIndex).click()
     }
 }
 // 搜索事件
@@ -134,13 +133,22 @@ function up() {
             searchObj.value = dataObj.innerHTML
         }
     } catch (e) {
-
+        let liObj = document.getElementsByTagName("li")
+        position = liObj.length
+        let dataObj = document.getElementById(optionIdPrefix + --position)
+        dataObj.style.color = 'black'
+        if (dataObj.innerHTML !== '' && dataObj.innerHTML !== undefined) {
+            searchObj.value = dataObj.innerHTML
+        }
     }
 }
 
 // 下移
 function down() {
     if (position === document.getElementsByTagName("li").length - 1) {
+        document.getElementById(optionIdPrefix + position).style.color = 'gray'
+        position = -1
+        down()
         return
     }
     try {
@@ -164,6 +172,10 @@ function switchSearchEngine(val) {
     if (val === 37 && --symbol === 0) {
         symbol = 4
     }
+    switching()
+}
+
+function switching() {
     switch (symbol) {
         case 1:
             markObj.innerHTML = 'G'

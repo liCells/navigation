@@ -13,96 +13,41 @@ function init() {
         localStorage.setItem(localStorageIndexKey, 1)
         localStorage.setItem(localStorageSumKey, 4)
     }
+    checkNetwork()
 }
 
-let commonlyUsedUrls = [
-    {
-        category: 'code',
-        urls: [
-            {
-                title: 'github',
-                url: 'https://github.com/',
-                content: ''
-            },
-            {
-                title: 'gitee',
-                url: 'https://gitee.com/',
-                content: ''
-            },
-            {
-                title: '美团技术博客',
-                url: 'https://tech.meituan.com/',
-                content: ''
-            },
-            {
-                title: '数据库内核月报',
-                url: 'http://mysql.taobao.org/monthly/',
-                content: ''
-            },
-            {
-                title: 'Thoughtworks洞见',
-                url: 'https://insights.thoughtworks.cn/',
-                content: ''
-            },
-            {
-                title: 'pom 镜像站',
-                url: 'https://mvnrepository.com/',
-                content: '我是人类...'
-            },
-            {
-                title: 'Programming-Idioms',
-                url: 'https://programming-idioms.org/about#about-block-cheatsheets',
-                content: '学习新语言, 将两种语言进行对比'
-            },
-            {
-                title: '探索雷达',
-                url: 'https://www.thoughtworks.com/cn/radar',
-                content: '有态度的前沿技术解析'
-            },
-            {
-                title: 'github-rank',
-                url: 'https://wangchujiang.com/github-rank/',
-                content: 'Github 中国和全球用户排名, 全球仓库 Star 最多排名'
-            },
-            {
-                title: '',
-                url: '',
-                content: ''
-            },
-        ]
-    },
-    {
-        category: 'movies',
-        urls: [
-            {
-                title: '哔哩哔哩',
-                url: 'https://www.bilibili.com/',
-                content: ''
-            },
-            {
-                title: '油管',
-                url: 'https://www.youtube.com/',
-                content: ''
-            },
-            {
-                title: '',
-                url: '',
-                content: ''
-            },
-            {
-                title: '',
-                url: '',
-                content: ''
-            },
-            {
-                title: '',
-                url: '',
-                content: ''
-            },
-        ]
-    },
-]
-
+function checkNetwork() {
+    if (getSearchEngineIndex() === 1) {
+        var startTime, endTime
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 1) {
+                startTime = Date.now()
+            }
+            if (xhr.readyState === 4 && xhr.status !== 200) {
+                mdui.snackbar({
+                    message: '检测到谷歌网络不可用, 已自动切换至百度',
+                    timeout: 3000,
+                    position: 'right-bottom'
+                })
+                symbol = 2
+                switching()
+            }
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                if ((Date.now() - startTime) > 1000) {
+                    mdui.snackbar({
+                        message: '谷歌网络延迟偏高, 建议使用百度',
+                        timeout: 3000,
+                        position: 'right-bottom'
+                    })
+                }
+            }
+        }
+        xhr.timeout = 3000
+        xhr.open("GET", "https://www.google.com", true);
+        xhr.send()
+    }
+}
 
 // 根据index获取对应的搜索引擎
 function getSearchEngine(val) {
@@ -120,5 +65,5 @@ function getSearchEngineSum() {
 }
 
 function setSearchEngineIndex(val) {
-    return localStorage.setItem(localStorageIndexKey, val)
+    localStorage.setItem(localStorageIndexKey, val)
 }
