@@ -22,20 +22,20 @@
     height: 50px;
     font-size: 30px;
     text-align: center;
-    border-radius: 22px;
+    border-radius: 22px 22px;
     background-color: #e3e3e3;
 }
 
 .main-data-list {
-    left: 0;
+    left: -22px;
     right: 0;
-    width: 35%;
+    width: 622px;
     border: none;
     margin: 0 auto;
     outline: medium;
     font-size: 37px;
     position: absolute;
-    border-radius: 22px;
+    border-radius: 0 0 22px 22px;
     list-style: none;
 }
 

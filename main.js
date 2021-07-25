@@ -48,7 +48,7 @@ function findOptions(val, options) {
     position = -1
     for (let i = 0; i < options.length; i++) {
         if (options[i].title.toLowerCase().indexOf(val.toLowerCase()) > -1) {
-            optionalContext += "<li class='select-option' id='" + optionIdPrefix + optionalSum + "' value='" + options[i].url + "'>" + options[i].title + "</li>"
+            optionalContext += "<li class='select-option' style='background: rgb(227, 227, 227)' id='" + optionIdPrefix + optionalSum + "' value='" + options[i].url + "'>" + options[i].title + "</li>"
             optionalSum++
         }
         if (optionalSum === 10) {
@@ -85,6 +85,7 @@ function search() {
     // ESC
     if (event.keyCode === 27) {
         emptySearchInput()
+        searchObj.style.borderRadius = '22px 22px'
         return
     }
 
@@ -122,10 +123,16 @@ function search() {
         }
         dataListObj.innerHTML = li
         let dataObj = document.getElementsByTagName("li")
+        if (dataObj.length !== 0) {
+            searchObj.style.borderRadius = '22px 22px 0px 0px'
+        }
         for (let i = 0; i < dataObj.length; i++) {
             dataObj[i].addEventListener("click", function () {
                 searchObj.value = this.innerText
             })
+            if (i === dataObj.length - 1) {
+                dataObj[i].style.borderRadius = '0px 0px 22px 22px'
+            }
         }
     }
 }
