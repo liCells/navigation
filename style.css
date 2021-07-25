@@ -1,4 +1,4 @@
- .main-center {
+.main-center {
     display: block !important;
     margin-right: auto !important;
     margin-left: auto !important;
@@ -40,7 +40,8 @@
 }
 
 body {
-    background-color: #fdebd6;
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
 }
 
 .suspendedShadow {

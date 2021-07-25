@@ -14,6 +14,15 @@ function init() {
         localStorage.setItem(localStorageSumKey, 4)
     }
     checkNetwork()
+    let background = localStorage.getItem('background')
+    if (background !== undefined) {
+        let bodyObj = document.getElementById("body")
+        if (background.startsWith("data:image")) {
+            bodyObj.style.backgroundImage = "url('" + background + "')"
+        } else {
+            bodyObj.style.backgroundColor = background
+        }
+    }
 }
 
 function checkNetwork() {
