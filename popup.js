@@ -3,6 +3,7 @@ let symbol = getSearchEngineIndex()
 // 选项位置
 let position = -1
 let optionIdPrefix = 'option-'
+let prefixTab = "tab-"
 // 特殊KEY
 let ignoreKeys = [37, 38, 39, 40, 13, 27]
 let temp = []
@@ -14,8 +15,6 @@ let searchObj = document.getElementById("search")
 let dataListObj = document.getElementById("dataList")
 let markObj = document.getElementById("logo")
 
-// 聚焦到输入框
-searchObj.focus()
 // 设置输入框触发事件
 searchObj.onkeyup = search
 
@@ -26,6 +25,8 @@ chrome.bookmarks.getTree(function (bookmarkArray) {
     buildList(bookmarkArray)
     // buildList(commonlyUsedUrls)
     switchSearchEngine(null)
+    // 聚焦到输入框
+    searchObj.focus()
 });
 
 // 递归处理书签
@@ -54,6 +55,18 @@ function findOptions(val, options) {
     return optionalContext
 }
 
+document.onkeydown=function(e) {
+    if (e.shiftKey && event.keyCode === 9) {
+        let activeTab = document.getElementsByClassName("mdui-tab-active")
+        let index = parseInt(activeTab[0].id.replace(prefixTab, ""))
+        if (index === 1) {
+            index = 0
+        } else {
+            ++index
+        }
+        document.getElementById(prefixTab + index).click()
+    }
+}
 // 搜索事件
 function search() {
     let val = searchObj.value

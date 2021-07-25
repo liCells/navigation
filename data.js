@@ -2,8 +2,6 @@ let localStorageKey = 'searchEngine'
 let localStorageIndexKey = 'searchEngineIndex'
 let localStorageSumKey = 'searchEngineSum'
 
-let backgroundPic = 'backgroundPic'
-
 init()
 
 function init() {
@@ -14,10 +12,6 @@ function init() {
         localStorage.setItem(localStorageKey + '-' + 4, 'https://www.so.com/s?q=')
         localStorage.setItem(localStorageIndexKey, 1)
         localStorage.setItem(localStorageSumKey, 4)
-    }
-    let pic = localStorage.getItem(backgroundPic)
-    if (!pic) {
-        document.getElementsByTagName("body").style.backgroundImage = pic
     }
 }
 
