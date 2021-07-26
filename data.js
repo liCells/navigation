@@ -35,12 +35,11 @@ function checkNetwork() {
             }
             if (xhr.readyState === 4 && xhr.status !== 200) {
                 mdui.snackbar({
-                    message: '检测到谷歌网络不可用, 已自动切换至百度',
+                    message: '检测到谷歌网络不可用, 建以切换至百度',
                     timeout: 3000,
                     position: 'right-bottom'
                 })
                 symbol = 2
-                switching()
             }
             if (xhr.readyState === 4 && xhr.status === 200) {
                 if ((Date.now() - startTime) > 2500) {
