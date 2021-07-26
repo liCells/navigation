@@ -19,7 +19,7 @@ let markObj = document.getElementById("logo")
 
 // 设置输入框触发事件
 searchObj.onkeydown = search
-navigationObj.onclick = tabIndex = 1
+navigationObj.onclick = function () {tabIndex = 1}
 
 // 处理所有书签
 const bookmarks = []
