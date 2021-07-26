@@ -1,15 +1,5 @@
 // 搜索引擎选项
 let symbol = getSearchEngineIndex()
-// 选项位置
-let position = -1
-let optionIdPrefix = 'option-'
-let prefixTab = "tab-"
-let tabIndex = 0
-// 特殊KEY
-let ignoreKeys = [37, 38, 39, 40, 13, 27, 16, 17, 18]
-let temp = []
-let optionalSum = 0
-let optionalContext = ''
 
 // 获取输入框
 let searchObj = document.getElementById("search")
@@ -58,7 +48,7 @@ function findOptions(val, options) {
     return optionalContext
 }
 
-document.onkeyup = function() {
+document.onkeyup = function () {
     if (event.keyCode === 191) {
         if (tabIndex !== 0) {
             tabIndex = 0
@@ -69,7 +59,7 @@ document.onkeyup = function() {
     }
     if (event.altKey && (event.keyCode === 49 || event.keyCode === 50)) {
         tabIndex = event.keyCode === 49 ? 0 : 1
-        document.getElementById(prefixTab +  tabIndex).click()
+        document.getElementById(prefixTab + tabIndex).click()
     }
 }
 

@@ -1,7 +1,3 @@
-let localStorageKey = 'searchEngine'
-let localStorageIndexKey = 'searchEngineIndex'
-let localStorageSumKey = 'searchEngineSum'
-
 init()
 
 function init() {
