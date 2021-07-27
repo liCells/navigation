@@ -37,11 +37,6 @@
     list-style: none;
 }
 
-body {
-    -moz-background-size: 100% 100%;
-    background-size: 100% 100%;
-}
-
 .corner-button {
     margin-top: 3%;
     width: 100%;
@@ -119,8 +114,6 @@ body::-webkit-scrollbar {
 }
 
 body {
-    -ms-overflow-style: none;
-    height: 100%;
-    width: calc(100vw + 18px);
-    overflow: auto;
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
 }

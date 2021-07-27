@@ -57,8 +57,8 @@ document.onkeyup = function () {
         searchObj.focus()
         return
     }
-    if (event.altKey && (event.keyCode === 49 || event.keyCode === 50)) {
-        tabIndex = event.keyCode === 49 ? 0 : 1
+    if (event.altKey && (event.keyCode === 49 || event.keyCode === 50 || event.keyCode === 51)) {
+        tabIndex = event.keyCode === 49 ? 0 : event.keyCode === 50 ? 1 : 2
         document.getElementById(prefixTab + tabIndex).click()
     }
 }

@@ -23,8 +23,7 @@
   "content_scripts": [
     {
       "matches": ["*://*/**"],
-      "js": ["content.js", "mdui/js/mdui.min.js"],
-      "css": ["mdui/css/mdui.min.css"]
+      "js": ["content.js"]
     }
   ]
 }
