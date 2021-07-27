@@ -9,6 +9,7 @@
   "permissions": [
     "bookmarks",
     "storage",
+    "notifications",
     "https://www.baidu.com/",
     "https://*.google.com/",
     "https://*.google.com.hk/"

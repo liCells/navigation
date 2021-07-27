@@ -19,6 +19,55 @@ function init() {
             bodyObj.style.backgroundColor = background
         }
     }
+
+    initTodo();
+    setClickListener();
+    setDeleteListener();
+}
+
+// 设置稍后读删除事件
+function setDeleteListener() {
+    let tableI = document.getElementsByName("todo-table-i")
+    for (let i = 0; i < tableI.length; i++) {
+        tableI[i].onclick = function () {
+            let todoJson = localStorage.getItem('todo')
+            let todoObj = JSON.parse(todoJson)
+            todoObj.splice(this.getAttribute('index'), 1)
+            localStorage.setItem('todo', JSON.stringify(todoObj))
+
+            this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)
+        }
+    }
+}
+
+// 设置稍后读点击事件
+function setClickListener() {
+    let todoLi = document.getElementsByName("todo-table-td")
+    for (let i = 0; i < todoLi.length; i++) {
+        todoLi[i].onclick = function () {
+            window.open(this.getAttribute("url"), '_blank')
+        }
+    }
+}
+
+function initTodo() {
+    let todo = ''
+    let todoJson = localStorage.getItem('todo')
+    let todoObj = JSON.parse(todoJson)
+    for (let i = 0; i < todoObj.length; i++) {
+        todo += '<tr style="height: 50px;">' +
+            '    <td style="width: 80%;" name="todo-table-td" class="mdui-ripple" url="' + todoObj[i].url + '">' +
+            '        <h3 style="padding-left: 2%;">' + todoObj[i].title + '</h3>' +
+            '    </td>' +
+            '    <td style="width: 17%;">记录时间: ' + formatDateTime(new Date(todoObj[i].time)) + '</td>' +
+            '    <td style="width: 3%;">' +
+            '        <button class="mdui-btn mdui-ripple" name="todo-table-i" index="' + i + '">' +
+            '            <i class="mdui-icon material-icons">delete</i>' +
+            '        </button>' +
+            '    </td>' +
+            '</tr>'
+    }
+    document.getElementById('todo-table').innerHTML = todo
 }
 
 function checkNetwork() {
@@ -71,3 +120,20 @@ function getSearchEngineSum() {
 function setSearchEngineIndex(val) {
     localStorage.setItem(localStorageIndexKey, val)
 }
+
+
+function formatDateTime(inputTime) {
+    var date = new Date(inputTime);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    var d = date.getDate();
+    d = d < 10 ? ('0' + d) : d;
+    var h = date.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    second = second < 10 ? ('0' + second) : second;
+    return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+};

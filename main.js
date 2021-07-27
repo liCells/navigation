@@ -4,12 +4,14 @@ let symbol = getSearchEngineIndex()
 // 获取输入框
 let searchObj = document.getElementById("search")
 let navigationObj = document.getElementById("tab-1")
+let todoObj = document.getElementById("tab-2")
 let dataListObj = document.getElementById("dataList")
 let markObj = document.getElementById("logo")
 
 // 设置输入框触发事件
 searchObj.onkeydown = search
 navigationObj.onclick = function () {tabIndex = 1}
+todoObj.onclick = function () {tabIndex = 2}
 
 // 处理所有书签
 const bookmarks = []
