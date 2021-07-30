@@ -8,7 +8,6 @@
   },
   "permissions": [
     "bookmarks",
-    "storage",
     "notifications",
     "https://www.baidu.com/",
     "https://*.google.com/",
