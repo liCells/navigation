@@ -1,5 +1,17 @@
 init()
 
+function setBackground() {
+    let background = localStorage.getItem('background')
+    if (background !== undefined && background !== null) {
+        let bodyObj = document.getElementById("body")
+        if (background.startsWith("data:image")) {
+            bodyObj.style.backgroundImage = "url('" + background + "')"
+        } else {
+            bodyObj.style.backgroundColor = background
+        }
+    }
+}
+
 function init() {
     if (!localStorage.getItem(localStorageIndexKey)) {
         localStorage.setItem(localStorageKey + '-' + 1, 'https://www.google.com/search?q=')
@@ -10,16 +22,7 @@ function init() {
         localStorage.setItem(localStorageSumKey, 4)
     }
     checkNetwork()
-    let background = localStorage.getItem('background')
-    if (background !== undefined) {
-        let bodyObj = document.getElementById("body")
-        if (background.startsWith("data:image")) {
-            bodyObj.style.backgroundImage = "url('" + background + "')"
-        } else {
-            bodyObj.style.backgroundColor = background
-        }
-    }
-
+    setBackground();
     initTodo();
     setClickListener();
     setDeleteListener();
