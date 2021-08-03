@@ -1,4 +1,4 @@
-let targetExtensionId = "amknoeeijphpflngehimhkcodfebeein"
+let targetExtensionId = chrome.runtime.id
 
 document.onkeyup = function () {
     if (event.ctrlKey && event.keyCode === 191) {

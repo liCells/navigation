@@ -57,6 +57,9 @@ function initTodo() {
     let todo = ''
     let todoJson = localStorage.getItem('todo')
     let todoObj = JSON.parse(todoJson)
+    if (todoObj === null) {
+        return
+    }
     for (let i = 0; i < todoObj.length; i++) {
         todo += '<tr style="height: 50px;">' +
             '    <td style="width: 80%;" name="todo-table-td" class="mdui-ripple" url="' + todoObj[i].url + '">' +
