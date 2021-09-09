@@ -4,21 +4,18 @@ let symbol = getSearchEngineIndex()
 // 获取输入框
 let searchObj = document.getElementById("search")
 let navigationObj = document.getElementById("tab-1")
-let todoObj = document.getElementById("tab-2")
 let dataListObj = document.getElementById("dataList")
 let markObj = document.getElementById("logo")
 
 // 设置输入框触发事件
 searchObj.onkeydown = search
 navigationObj.onclick = function () {tabIndex = 1}
-todoObj.onclick = function () {tabIndex = 2}
 
 // 处理所有书签
 const bookmarks = []
 // 获取书签
 chrome.bookmarks.getTree(function (bookmarkArray) {
     buildList(bookmarkArray)
-    // buildList(commonlyUsedUrls)
     switchSearchEngine(null)
     // 聚焦到输入框
     searchObj.focus()
@@ -192,13 +189,16 @@ function switching() {
             markObj.innerHTML = 'G'
             break
         case 2:
-            markObj.innerHTML = 'B'
+            markObj.innerHTML = '必应'
             break
         case 3:
-            markObj.innerHTML = 'S'
+            markObj.innerHTML = '百度'
             break
         case 4:
-            markObj.innerHTML = '3'
+            markObj.innerHTML = '搜狗'
+            break
+        case 5:
+            markObj.innerHTML = '360'
             break
     }
     setSearchEngineIndex(symbol)

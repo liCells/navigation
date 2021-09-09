@@ -15,11 +15,12 @@ function setBackground() {
 function init() {
     if (!localStorage.getItem(localStorageIndexKey)) {
         localStorage.setItem(localStorageKey + '-' + 1, 'https://www.google.com/search?q=')
-        localStorage.setItem(localStorageKey + '-' + 2, 'https://www.baidu.com/s?wd=')
-        localStorage.setItem(localStorageKey + '-' + 3, 'https://www.sogou.com/web?query=')
-        localStorage.setItem(localStorageKey + '-' + 4, 'https://www.so.com/s?q=')
+        localStorage.setItem(localStorageKey + '-' + 2, 'https://cn.bing.com/search?ensearch=1&q=')
+        localStorage.setItem(localStorageKey + '-' + 3, 'https://www.baidu.com/s?wd=')
+        localStorage.setItem(localStorageKey + '-' + 4, 'https://www.sogou.com/web?query=')
+        localStorage.setItem(localStorageKey + '-' + 5, 'https://www.so.com/s?q=')
         localStorage.setItem(localStorageIndexKey, 1)
-        localStorage.setItem(localStorageSumKey, 4)
+        localStorage.setItem(localStorageSumKey, 5)
     }
     checkNetwork()
     setBackground();
