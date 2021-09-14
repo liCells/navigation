@@ -1,7 +1,7 @@
 {
-  "name": "navigation",
-  "version": "0.0.1",
-  "description": "导航",
+  "name": "new tab",
+  "version": "1.0.0",
+  "description": "新标签页",
   "manifest_version": 2,
   "chrome_url_overrides": {
     "newtab": "index.html"
